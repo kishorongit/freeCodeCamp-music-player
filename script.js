@@ -164,3 +164,31 @@ const pauseSong = () => {
 };
 
 pauseButton.addEventListener("click", pauseSong);
+
+const getCurrentSongIndex = () =>
+    userData?.songs.indexOf(userData?.currentSong);
+
+const playNextSong = () => {
+    if (userData?.currentSong === null) {
+        playSong(userData?.songs[0].id);
+    } else {
+        const currentSongIndex = getCurrentSongIndex();
+        const nextSong = userData?.songs[currentSongIndex + 1];
+
+        playSong(nextSong.id);
+    }
+};
+
+nextButton.addEventListener("click", playNextSong);
+
+const playPreviousSong = () => {
+    if (userData?.currentSong === null) return;
+    else {
+        const currentSongIndex = getCurrentSongIndex();
+        const previousSong = userData?.songs[currentSongIndex - 1];
+
+        playSong(previousSong.id);
+    }
+};
+
+previousButton.addEventListener("click", playPreviousSong);
